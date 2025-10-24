@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} {{board.name}} {% endblock %}
+
+{% block content %}
+
+<div class="container my-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+        <li class="breadcrumb-item active">{{ board.name }}</li>
+      </ol>
+
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">{{ board.name }}</h3>
+          <p class="text-muted">{{ board.description }}</p>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
