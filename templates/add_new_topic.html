@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %}{{ board.name }}{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+
+  <!-- 🧭 Breadcrumb navigation -->
+  <nav aria-label="breadcrumb ">
+    <ol class="breadcrumb bg-body-tertiary p-3 rounded shadow-sm">
+      <li class="breadcrumb-item">
+        <a href="{% url 'home' %}" class="text-decoration-none">Boards</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="{% url 'board_topics:topics_in_board' board.slug %}" class="text-decoration-none">{{ board.name }}</a>
+      </li>
+      <li class="breadcrumb-item active " aria-current="page">
+         New topic
+      </li>
+    </ol>
+  </nav>
+
+  <!-- 🧾 Form card -->
+  <div class="card shadow-sm border-0 mt-4">
+    <div class="card-body p-4">
+      <h3 class="card-title text-center text-primary mb-4">
+        Add New Topic
+      </h3>
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {% bootstrap_form form layout='floating' %}
+
+        <div class="d-flex justify-content-center mt-4">
+          <button type="submit" class="btn btn-success px-4 me-2">
+            <i class="bi bi-send-fill me-1"></i> Submit
+          </button>
+          <a href="{% url 'board_topics:topics_in_board' board.slug %}" class="btn btn-outline-secondary px-4">
+            Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

@@ -4,10 +4,14 @@
 {% block title %} Boards {% endblock%}
 
 {% block content %}
-    <div class="container">
-      <ol class="breadcrumb my-4">
-        <li class="breadcrumb-item active">Boards</li>
-      </ol>
+    <div class="container my-4">
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-body-tertiary p-3 rounded shadow-sm">
+      <li class="breadcrumb-item">
+        Boards
+      </li>
+    </ol>
+  </nav>
 
       <table class="table table-striped table-hover align-middle">
         <thead class="table-dark">
@@ -22,7 +26,7 @@
           {% for board in boards %}
             <tr>
               <td>
-                <strong> <a href="{% url 'board_topics' board.slug %}"> {{board.name}} </a> </strong>
+                <strong> <a href="{% url 'board_topics:topics_in_board' board.slug %}"> {{board.name}} </a> </strong>
                 <small class="text-muted d-block">{{ board.description }}</small>
               </td>
               <td class="align-middle">0</td>

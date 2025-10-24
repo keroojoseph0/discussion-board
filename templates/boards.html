@@ -1,21 +1,76 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
 
-{% block title %} {{board.name}} {% endblock %}
+{% block title %}{{ board.name }}{% endblock %}
 
 {% block content %}
-
 <div class="container my-4">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
-        <li class="breadcrumb-item active">{{ board.name }}</li>
-      </ol>
 
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h3 class="card-title">{{ board.name }}</h3>
-          <p class="text-muted">{{ board.description }}</p>
-        </div>
-      </div>
+  <!-- 🧭 Breadcrumb navigation -->
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-body-tertiary p-3 rounded shadow-sm">
+      <li class="breadcrumb-item">
+        <a href="{% url 'home' %}" class="text-decoration-none">Boards</a>
+      </li>
+      <li class="breadcrumb-item">
+            {{ board.name }}
+      </li>
+    </ol>
+  </nav>
+
+  <!-- 🏫 Board information card -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h3 class="card-title">{{ board.name }}</h3>
+      <p class="text-muted">{{ board.description }}</p>
+
+      <!-- ➕ Add new topic button -->
+      <a href="{% url 'board_topics:add_new_topic' board.slug %}" class="btn btn-primary">
+        Add New Topic
+      </a>
     </div>
+  </div>
 
+  <!-- 📋 Topics table -->
+  <div class="card">
+    <div class="card-header">
+      <h5 class="mb-0">Topics</h5>
+    </div>
+    <div class="card-body p-0">
+      <table class="table table-hover mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Topic</th>
+            <th>Starter</th>
+            <th>Replies</th>
+            <th>Views</th>
+            <th>Last Updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for topic in topics %}
+          <tr>
+            <td>
+             <a href="">
+                {{ topic.subject }}
+              </a>
+            </td>
+            <td>{{ topic.created_by }}</td>
+            <td>{{ topic.replies_count }}0</td>
+            <td>{{ topic.views }}0</td>
+            <td>{{ topic.updated_at|date:"M d, Y" }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5" class="text-center py-3 text-muted">
+              No topics yet. Be the first to <a href="{% url 'board_topics:add_new_topic' board.slug %}">create one</a>!
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
 {% endblock %}

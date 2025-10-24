@@ -20,6 +20,7 @@ class Board(models.Model):
 
 class Topic(models.Model):
     subject = models.CharField(max_length=250)
+    message = models.TextField()
     board = models.ForeignKey(Board, related_name='topics', on_delete=models.CASCADE)
     created_by = models.ForeignKey(User, related_name='topics', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
