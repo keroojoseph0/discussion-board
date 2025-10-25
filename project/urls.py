@@ -17,11 +17,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from board import views
+from accounts import views as view_accounts
 from django.conf.urls.static import static
 from django.conf import settings
 
 
+
 urlpatterns = [
+    path('reset/done', view_accounts.CustomUserPasswordResetDone.as_view(), name = 'password_reset_done'),
+    path('reset/reset/<uidb64>/<token>/', view_accounts.CustomUserPasswordResetConfirm.as_view(), name = "password_reset_confirm"),
+    path('reset/complete', view_accounts.CustomUserPasswordResetComplete.as_view(), name = 'password_reset_complete'),
+    path('password/change', view_accounts.CustomUserPasswordChange.as_view(), name = 'password_change'),
+    path('password/done', view_accounts.CustomUserPasswordChangeDone.as_view(), name = 'password_change_done'),
+    
+    path('accounts/', include('accounts.urls', namespace='accounts')),
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('boards/', include('board.urls', namespace='board_topics')),

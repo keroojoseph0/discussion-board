@@ -1,0 +1,50 @@
+{% extends 'base_generic.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+  <!-- 🏷️ Logo and heading -->
+  <h1 class="text-center logo my-4">
+    <a href="{% url 'home' %}" class="text-decoration-none text-dark fw-bold">
+      Django Boards
+    </a>
+  </h1>
+
+  <!-- 🧾 Signup form card -->
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <div class="card shadow-lg border-0">
+        <div class="card-body p-4">
+          <h3 class="card-title text-center mb-4 text-primary">Sign Up</h3>
+          
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% bootstrap_form form layout='floating' %}
+            
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary rounded-pill py-2">
+                Create an account
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card-footer bg-light text-center py-3">
+          Already have an account?
+          <a href="{% url 'accounts:login' %}" class="fw-semibold text-decoration-none text-primary">
+            Log in
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

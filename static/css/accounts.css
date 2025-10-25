@@ -1,0 +1,39 @@
+/* Centered layout and soft aesthetic */
+body {
+  background: url("../image/watercolor.webp") no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo a {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.logo a:hover {
+  text-decoration: underline;
+}
+
+/* Card styling */
+.card {
+  border-radius: 12px;
+  background-color: #ffffffcc; /* light transparency */
+  backdrop-filter: blur(6px);
+}
+
+.card-title {
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+}

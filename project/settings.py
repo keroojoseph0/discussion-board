@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'board',
+    'accounts',
     'django_bootstrap5',
 ]
 
@@ -142,3 +143,13 @@ MEDIAFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configure Login and Logout redirect
+LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'accounts:login'
+
+
+
+# Configure user change password 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
