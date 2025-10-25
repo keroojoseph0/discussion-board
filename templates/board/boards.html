@@ -51,13 +51,13 @@
           {% for topic in topics %}
           <tr>
             <td>
-             <a href="">
+             <a href="{% url 'board_topics:topic_posts' board.slug topic.topic_slug  %}">
                 {{ topic.subject }}
               </a>
             </td>
             <td>{{ topic.created_by }}</td>
-            <td>{{ topic.replies_count }}0</td>
-            <td>{{ topic.views }}0</td>
+            <td>{{ topic.posts.count }}</td>
+            <td>{{ topic.views }}</td>
             <td>{{ topic.updated_at|date:"M d, Y" }}</td>
           </tr>
           {% empty %}

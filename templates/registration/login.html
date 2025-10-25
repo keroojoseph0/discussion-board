@@ -22,17 +22,21 @@
   <div class="row justify-content-center">
     <div class="col-lg-6 col-md-8 col-sm-10">
       <div class="card shadow-lg border-0">
-        <div class="card-body p-4">
+        <div class="card-body">
           <h3 class="card-title text-center mb-4 text-primary">Log In</h3>
 
           <form method="post" novalidate>
             {% csrf_token %}
-            {% bootstrap_form form layout='floating' %}
-            
+            {% bootstrap_form form layout='floating' %}           
             <div class="d-grid mt-4">
               <button type="submit" class="btn btn-primary rounded-pill py-2">
                 Log In
               </button>
+              <div class="text-center pt-3">
+          <a href="{% url 'accounts:reset' %}" class="fw-semibold text-decoration-none text-primary">
+            Forgotten password?
+          </a>
+        </div>
             </div>
           </form>
         </div>

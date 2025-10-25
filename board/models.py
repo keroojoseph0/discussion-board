@@ -25,6 +25,16 @@ class Topic(models.Model):
     created_by = models.ForeignKey(User, related_name='topics', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    topic_slug = models.SlugField(unique=True, blank=True)
+    views = models.PositiveIntegerField(default=0)
+    
+    def save(self, *args, **kwargs):
+        if not self.topic_slug:
+            self.topic_slug = slugify(self.subject)
+        super().save(*args, **kwargs)
+        
+    def get_replies_count(self):
+        return self.posts.count() - 1
     
     def __str__(self):
         return self.subject
@@ -37,5 +47,6 @@ class Post(models.Model):
     updated_by = models.ForeignKey(User, null=True, related_name='+', on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
     
+    
     def __str__(self):
-        return self.name
+        return str(self.topic)
