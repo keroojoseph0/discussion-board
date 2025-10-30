@@ -9,4 +9,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
     path('login/', views.CustomUserLogin.as_view(), name = 'login'),
     path('reset/', views.CustomUserPasswordReset.as_view(), name = 'reset'),
+    path('profile', views.UserUpdateView.as_view(), name = 'my_account'),
 ]

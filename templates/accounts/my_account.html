@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+
+{% block title %}My Account{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <!-- 🧭 Breadcrumb -->
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-body-tertiary p-3 rounded shadow-sm">
+      <li class="breadcrumb-item">
+        <a href="{% url 'home' %}" class="text-decoration-none">Home</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">My Account</li>
+    </ol>
+  </nav>
+
+  <!-- 🧑‍💼 Account Form -->
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-10">
+      <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body p-4">
+          <h3 class="mb-4 text-center text-primary">Update Your Account</h3>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <div class="d-flex justify-content-between mt-4">
+              <a href="{% url 'home' %}" class="btn btn-outline-secondary rounded-pill px-4">Cancel</a>
+              <button type="submit" class="btn btn-success rounded-pill px-4">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

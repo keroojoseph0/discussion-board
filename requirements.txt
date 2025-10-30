@@ -1,9 +1,12 @@
 Package           Version
 ----------------- -------
 asgiref           3.10.0
+bleach            6.2.0
 Django            5.2.7
 django-bootstrap5 25.2
+Markdown          3.9
 mysqlclient       2.2.7
 pip               24.0
 python-dotenv     1.1.1
 sqlparse          0.5.3
+webencodings      0.5.1

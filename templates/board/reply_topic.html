@@ -35,7 +35,7 @@
 
       <form method="post" novalidate>
         {% csrf_token %}
-        {% bootstrap_form form layout='floating' %}
+        {% bootstrap_form form layout='' %}
         <div class="d-flex justify-content-center mt-3">
           <button type="submit" class="btn btn-success px-4 me-2">
             <i class="bi bi-send-fill me-1"></i> Submit Reply
@@ -68,7 +68,7 @@
               <span class="fw-semibold">{{ post.created_by.username }}</span>
               <small class="text-muted">{{ post.created_at|naturaltime }}</small>
             </div>
-            <p class="mb-0">{{ post.message|linebreaks }}</p>
+            <p class="mb-0">{{ post.get_message_as_markdown }}</p>
           </div>
         </div>
       </div>

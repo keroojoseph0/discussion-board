@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
-
+from django.utils.safestring import mark_safe
+from markdown import markdown
 
 # Create your models here.
 
@@ -36,6 +37,9 @@ class Topic(models.Model):
     def get_replies_count(self):
         return self.posts.count() - 1
     
+    def get_message_as_markdown(self):
+        return mark_safe(markdown(self.message, extensions=['markdown.extensions.extra']))
+    
     def __str__(self):
         return self.subject
 
@@ -46,6 +50,9 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_by = models.ForeignKey(User, null=True, related_name='+', on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    def get_message_as_markdown(self):
+        return mark_safe(markdown(self.message, extensions=['markdown.extensions.extra']))
     
     
     def __str__(self):

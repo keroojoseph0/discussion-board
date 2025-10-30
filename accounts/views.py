@@ -10,6 +10,9 @@ from django.contrib.auth.views import PasswordResetCompleteView
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.views import PasswordChangeDoneView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import UpdateView
+from django.contrib.auth.models import User
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -52,3 +55,16 @@ class CustomUserPasswordChange(LoginRequiredMixin, PasswordChangeView):
     
 class CustomUserPasswordChangeDone(LoginRequiredMixin, PasswordChangeDoneView):
     template_name = 'registration/password_change_done.html'	
+    
+class UserUpdateView(UpdateView):
+    model = User
+    fields = ('first_name', 'last_name', 'email', )
+    template_name = 'accounts/my_account.html'
+    success_url = reverse_lazy('accounts:my_account')
+
+    def get_object(self):
+        return self.request.user 
+
+    def form_valid(self, form):
+        topic = form.save()
+        return redirect('home')

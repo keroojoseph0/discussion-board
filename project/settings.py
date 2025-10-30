@@ -154,3 +154,7 @@ LOGIN_URL = 'accounts:login'
 
 # Configure user change password 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+GRAVATAR_DEFAULT_IMAGE = 'retro'
+GRAVATAR_SIZE = 128
